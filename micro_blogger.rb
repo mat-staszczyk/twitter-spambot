@@ -16,12 +16,19 @@ class MicroBlogger
     end
   end
 
-  def dm(targer, message)
-    puts "Trying to send #{tager} this message:"
+  def dm(target, message)
+    puts "Trying to send #{target} this message:"
     puts message
-    message = "d @#{targer} #{message}"
-    tweet(message)
+    screen_names = @client.followers.collect { |follower| @client.user(follower).screen_name }
+    if screen_names.include? target
+      message = "d @#{target} #{message}"
+      tweet(message) 
+    else
+      puts "@#{target} is not following you!"
+    end
   end
+
+  def 
 
   def run
     puts "Welcome to the JSL Twitter Client!"
