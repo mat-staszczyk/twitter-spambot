@@ -28,8 +28,6 @@ class MicroBlogger
     end
   end
 
-  def 
-
   def run
     puts "Welcome to the JSL Twitter Client!"
     
