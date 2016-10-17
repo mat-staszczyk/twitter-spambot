@@ -16,6 +16,20 @@ class MicroBlogger
     end
   end
 
+  def followers_list
+    screen_names = []
+    @client.followers.each do |follower|
+      screen_names << @client.user(follower).screen_name
+    end
+    screen_names
+  end
+
+  def spam_my_followers(message)
+    followers_list.each do |follower|
+      dm(follower, message)
+    end
+  end
+
   def dm(target, message)
     puts "Trying to send #{target} this message:"
     puts message
@@ -39,6 +53,7 @@ class MicroBlogger
       case command
         when 't' then tweet(parts[1..-1].join(" ")) 
         when 'dm' then dm(parts[1], parts[2..-1].join(" "))
+        when 'spam' then spam_my_friends(parts[1..-1].join(" "))
         when 'q' then puts "Goodbye!"
         else
           puts "Sorry, I don't know how to #{command}"
