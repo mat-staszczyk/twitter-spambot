@@ -9,10 +9,15 @@ class MicroBlogger
   end
 
   def tweet(message)
-    @client.update(message)
+    if message.length <= 140
+      @client.update(message)
+    else
+      puts "Your tweet is too long!"
+    end
+  end
+
+  def run
+    puts "Welcome to the JSL Twitter Client!"
   end
 
 end
-
-blogger = MicroBlogger.new
-blogger.tweet("MicroBlogger Initialized")
